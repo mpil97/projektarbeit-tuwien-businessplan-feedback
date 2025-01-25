@@ -1,0 +1,2 @@
+Extrahiere aus diesem Businessplan die Executive Summary. Verändere sie nicht. Gib sie ohne Kommentar zurück:
+{contents}

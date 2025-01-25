@@ -1,0 +1,36 @@
+Analysiere den folgenden Businessplan inklusive der Finanztabellen aus dem Blick eines Bankberaters. Führe einen Plausibilitätscheck durch und beachte dabei insbesondere die Umsatzplausibilität sowie die Übereinstimmung zwischen Text und Finanzplan. Liste deine Erkenntnisse in maximal 5 Aufzählungspunkte auf und fokussiere dich dabei auf die kritischen Schwachstellen. Verwende einen neutralen Schreibstil, sprich den Gründer informell an und erstelle dein Ergebnis in drei Teilen. Stelle keine Rückfragen:
+1.	Gefundene Schwachstellen
+ - Liste alle identifizierten Schwachstellen in klaren, präzisen, nummerierten Bulletpoints auf. 
+ - Gib für jede Schwachstelle eine kurze Begründung, warum sie problematisch sein könnte.
+2.	Empfehlungen
+ - Formuliere auf Basis der gefundenen Schwachstellen konkrete, kurze Handlungsempfehlungen in Bulletpoints mit der identen Nummerierung.
+3.	Zusammenfassung
+ - Schreibe einen Absatz über die wichtigsten Kennzahlen und die Finanzsituation des Unternehmens.
+ - Ergänze einen sehr kurzen Absatz über deine Einschätzung, ob die Planung plausibel ist.
+Achte bei deiner Analyse auf folgende Aspekte (ohne Rückfragen zu stellen):
+•	Umsätze
+ - Ist ausreichend Personal für den geplanten Umsatz vorhanden?
+ - Sind die angesetzten Preise realistisch und nachvollziehbar?
+ - Ist der Auslastungsfaktor marktüblich?
+•	Kosten
+ - Wurden alle relevanten Kosten für die Gründung berücksichtigt?
+ - Liegen die Kosten im marktüblichen Rahmen?
+ - Werden Mindestgehälter eingehalten?
+•	Markt
+ - Wurde die Marktentwicklung plausibel begründet?
+ - Gibt es eine realistische Betrachtung von direkten und indirekten Konkurrenten?
+ - Hat der Gründer eine möglicherweise notwendige Gewerbeberechtigung?
+•	Innere Plausibilität
+ - Stimmen die Aussagen aus dem Textteil und dem Finanzteil überein?
+•	Finanzierung
+ - Liegt die Eigenkapitalquote über 20%?
+ - Wurde zwischen Betriebsmittel- und Investitionskredit unterschieden?
+ - Sind die Kreditlaufzeiten (Investitions- und Betriebsmittelkredit) plausibel gewählt?
+ - Wurden Sicherheiten für den Kredit hinterlegt?
+•	Kennzahlen
+ - Erzielt das Unternehmen einen positiven operativen Cashflow?
+ - Ab wann wird ein Gewinn erwirtschaftet?
+ - Reicht die Finanzierung aus, um Liquiditätsengpässe zu vermeiden?
+•	Sonstige Auffälligkeiten
+ - Gibt es weitere Aspekte, die auffallen oder kritisch wirken, hier aber nicht explizit gelistet wurden?
+Nutze die folgenden Daten als Grundlage deiner Analyse:
