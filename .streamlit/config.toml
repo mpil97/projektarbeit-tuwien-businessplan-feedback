@@ -1,6 +1,9 @@
+# .streamlit/config.toml
+
 [theme]
-primaryColor = '#1e90ff'
-backgroundColor = '#f0f0f0'
-secondaryBackgroundColor = '#ffffff'
-textColor = '#ff0000'  # For text color, usually this is for headings and inline text
-font = 'serif'
+base = "light"
+primaryColor = '#22cc9d'
+backgroundColor = '#ffffff'
+secondaryBackgroundColor = '#F0F2F6'
+textColor = '#000000'
+font = 'sans serif'

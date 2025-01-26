@@ -168,6 +168,8 @@ def extrat_es_from_bp(api_key: str, contents: str, prompt_file_path: str = "prom
 # Streamlit Application
 # ======================
 
+
+
 def sidebar():
     """
     Creates the sidebar with file uploader and API key input.
@@ -175,11 +177,27 @@ def sidebar():
     Returns:
         tuple: Uploaded files and API key.
     """
-    st.sidebar.header("Dokumente hochladen")
+    st.sidebar.header("Deine Eingaben", divider="gray")
+
+    # API Key Input Section
+    st.sidebar.subheader("API Key")
+
+    # Text input for API key
+    api_key = st.sidebar.text_input(
+        "OpenAI API-Key",
+        type="password",
+        placeholder="sk-*****"  # Placeholder for better user input guidance
+    )
+
+    # Spacing
+    st.sidebar.markdown("<br>", unsafe_allow_html=True)
+
+    # File Uploader Section
+    st.sidebar.subheader("Dateiupload")
 
     # File uploader for documents
     uploaded_files = st.sidebar.file_uploader(
-        "Lade deinen Businessplan und Finanzplan hoch (max. 2 Dokumente)",
+        "Businessplan und Finanzplan (max 2 Dokumente)",
         type=["pdf", "docx", "txt"],
         accept_multiple_files=True
     )
@@ -189,17 +207,12 @@ def sidebar():
         st.sidebar.warning("Bitte lade maximal 2 Dateien hoch.")
         uploaded_files = uploaded_files[:2]  # Limit to first two files
 
-    # Text input for API key
-    api_key = st.sidebar.text_input(
-        "OpenAI API-Key",
-        type="password"
-    )
-
     # Display the uploaded files
     if uploaded_files:
-        st.sidebar.subheader("Hochgeladene Dokumente:")
+        st.sidebar.markdown("<br>", unsafe_allow_html=True)  # Extra spacing
+        st.sidebar.subheader("Hochgeladene Dokumente",divider="gray")
         for file in uploaded_files:
-            st.sidebar.write(file.name)
+            st.sidebar.write(f"- {file.name}")  # Bullet list for clarity
 
     return uploaded_files, api_key
 
@@ -219,45 +232,63 @@ def process_files(uploaded_files) -> str:
         combined_text += text + "\n"
     return combined_text
 
+import streamlit as st
+
 def main_panel(uploaded_files, api_key):
     """
-    creates the main panel with action buttons.
+    Creates the main panel with action buttons.
 
-    args:
-        uploaded_files (list): list of uploaded files.
-        api_key (str): openai api key.
+    Args:
+        uploaded_files (list): List of uploaded files.
+        api_key (str): OpenAI API key.
     """
 
     st.header("Businessplan Feedback Tool")
 
-    # define prompts
+    # Define prompts
     prompt_es_feedback = load_prompt('prompt_es_feedback.txt') + "\n\n{contents}"
     prompt_plausibility_check = load_prompt('prompt_plausibility_check.txt') + "\n\n{contents}"
 
-    # Check if files and API key are present
+    # Check if files and api key are present
     can_interact = bool(uploaded_files and api_key)
 
-    # action: feedback
-    if st.button("Feedback zum Executive Summary erhalten", key='feedback', disabled=not can_interact):
-        with st.spinner("Feedback wird generiert..."):
-            document_contents = process_files(uploaded_files)
-            executive_summary_contents = extrat_es_from_bp(api_key, document_contents)
-            feedback_prompt = prompt_es_feedback.format(contents=executive_summary_contents)
-            feedback = call_openai_api(api_key, feedback_prompt)
-            if feedback:
-                st.subheader("Feedback zur Executive Summary:")
-                st.write(feedback)
+    # Create two columns for buttons
+    col1, col2 = st.columns(2)
 
-    # action: plausibility check
-    if st.button("Plausibilitätsprüfung durchführen", key='plausibility', disabled=not can_interact):
-        with st.spinner("Plausibilitätsprüfung wird durchgeführt..."):
-            document_contents = process_files(uploaded_files)
-            plausibility_prompt = prompt_plausibility_check.format(contents=document_contents)
-            plausibility_check = call_openai_api(api_key, plausibility_prompt)
-            print("sent to OpenAI")
+    # Placeholder for feedback and plausibility results
+    st.markdown("<br>", unsafe_allow_html=True)
+    result_placeholder = st.empty()
+
+    # Action: Feedback in the first column
+    with col1:
+        if st.button("Feedback zum Executive Summary erhalten", key='feedback', disabled=not can_interact):
+            with st.spinner("Feedback wird generiert..."):
+                document_contents = process_files(uploaded_files)
+                executive_summary_contents = extrat_es_from_bp(api_key, document_contents)
+                feedback_prompt = prompt_es_feedback.format(contents=executive_summary_contents)
+                feedback = call_openai_api(api_key, feedback_prompt)
+
+            # Update the results placeholder
+            if feedback:
+                result_placeholder.markdown("<br>", unsafe_allow_html=True)
+                with result_placeholder.container():
+                    st.subheader("Feedback zur Executive Summary:", divider="gray")
+                    st.write(feedback)
+
+    # Action: Plausibility Check in the second column
+    with col2:
+        if st.button("Plausibilitätsprüfung durchführen", key='plausibility', disabled=not can_interact):
+            with st.spinner("Plausibilitätsprüfung wird durchgeführt..."):
+                document_contents = process_files(uploaded_files)
+                plausibility_prompt = prompt_plausibility_check.format(contents=document_contents)
+                plausibility_check = call_openai_api(api_key, plausibility_prompt)
+
+            # Update the results placeholder
             if plausibility_check:
-                st.subheader("Ergebnis der Plausibilitätsprüfung:")
-                st.write(plausibility_check)
+                result_placeholder.markdown("<br>", unsafe_allow_html=True)
+                with result_placeholder.container():
+                    st.subheader("Ergebnis der Plausibilitätsprüfung:", divider="gray")
+                    st.write(plausibility_check)
 
     st.markdown("<br>", unsafe_allow_html=True)
   
