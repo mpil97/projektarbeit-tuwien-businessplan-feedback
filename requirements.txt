@@ -1,2 +1,5 @@
 streamlit
 openai
+os
+PyPDF2
+docx
