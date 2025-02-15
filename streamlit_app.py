@@ -8,7 +8,7 @@ from docx import Document
 # Utility Functions
 # ======================
 
-def call_openai_api(api_key: str, prompt: str, model: str = "gpt-4o-mini") -> str:
+def call_openai_api(api_key: str, prompt: str, model: str = "o1-mini") -> str:
     """
     Sends a prompt to the OpenAI API and returns the response.
 
@@ -25,10 +25,9 @@ def call_openai_api(api_key: str, prompt: str, model: str = "gpt-4o-mini") -> st
         response = client.chat.completions.create(
             model=model,
             messages=[
-                {"role": "system", "content": prompt}
+                {"role": "user", "content": prompt}
             ],
-            temperature=0.7,  # Adjust as needed
-            max_tokens=5000,   # Adjust as needed
+            max_completion_tokens=10000,   # Adjust as needed
         )
         return response.choices[0].message.content
     except OpenAIError as e:
